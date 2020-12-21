@@ -13,8 +13,10 @@ public class XLReader
 	
 	public static ArrayList<Object[]> getDataFromExcel() throws IOException 
 	{
-		ArrayList<Object[]> myData=new ArrayList<Object[]>(); 
-		File file=new File("E:\\Document\\BNFS\\New folder\\Assignments\\Inputs.xlsx");
+		ArrayList<Object[]> myData=new ArrayList<Object[]>();
+		
+		String projectpath = System.getProperty("user.dir");
+		File file=new File(projectpath+"\\Inputs.xlsx");
 		FileInputStream str=new FileInputStream(file);
 		XSSFWorkbook wb=new XSSFWorkbook(str);
 		XSSFSheet sh=wb.getSheetAt(1);

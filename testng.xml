@@ -4,18 +4,18 @@
 <suite thread-count="2" name="Suite" parallel="tests">
 	
 
-  <test name="ChromeTest">
+   <test name="ChromeTest">
   <parameter name="browser" value="Chrome"></parameter>
     <classes>
       <class name="Automation.Assignments.Registraion"/>
     </classes>
-  </test> <!-- Test -->
+  </test>  <!-- Test -->
   
-   <test name="FireFoxTest">
+   <!-- <test name="FireFoxTest">
   <parameter name="browser" value="Firefox"></parameter>
     <classes>
       <class name="Automation.Assignments.Registraion"/>
     </classes>
-  </test>  <!-- Test -->
+  </test> -->  <!-- Test -->
   
 </suite> <!-- Suite -->

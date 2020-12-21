@@ -27,18 +27,7 @@ public class Registraion
 	@Parameters("browser")
 	public void beforeM(String browser)
 	{
-		if(browser.equalsIgnoreCase("chrome"))
-		{
-			d=new ChromeDriver();
-		}
-		else if(browser.equalsIgnoreCase("firefox"))
-		{
-			d=new FirefoxDriver();
-		}
-		else
-		{
-			d=new ChromeDriver();
-		}
+		d=Base.getDriver(browser);
 		rp=new RegistrationPage(d);
 		d.manage().window().maximize();
 		d.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;
@@ -46,22 +35,22 @@ public class Registraion
 		d.get("https://dineshvelhal.github.io/testautomation-playground/register.html");
 	}
 	
-	 @DataProvider
+	/* @DataProvider
 	 public Object[][] getTestdata()
 	 {
 	 return new Object[][] {{"Shweta","chougale","shwetachougale@gmail.com","shweta","shweta"},
 		 {"Pallavi","chougale","","pallavi","pallavi"},
 		 {"Asha","","AshaPasle@gmail","Asha","Asha"},
 		 {"Snehal","Dhavale","Snehal","Snehal",""}};
-	 }
+	 }*/
 	
 	 //Method for reading data from excel
-	/*@DataProvider 
+	@DataProvider 
 	public Iterator<Object[]> getTestdata() throws IOException
 	{
 		ArrayList<Object[]> testdata = XLReader.getDataFromExcel();
 		return testdata.iterator();
-	}*/
+	}
 	 
 	 @Test (dataProvider = "getTestdata")
 	public void display(String name,String lname,String email,String pass,String cpass) throws IOException
@@ -74,19 +63,20 @@ public class Registraion
 		rp.Term().click();
 		rp.submit().click();
 		Assert.assertEquals(d.getTitle(), "Confirmation!");
-		screenShot("Picture");
+		screenShot("Image");
 	}
 	public void screenShot(String name) throws IOException
 	{
 		TakesScreenshot ts=(TakesScreenshot)d;
 		File src=ts.getScreenshotAs(OutputType.FILE);
-		String path="E:\\Document\\BNFS\\New folder\\Assignments\\ScreenShot\\";
+		String projectpath = System.getProperty("user.dir");
+		String path=projectpath+"\\ScreenShot\\";
 		File dest = new File(path+name+".jpg");
 		FileHandler.copy(src, dest);
 	}
 	@AfterMethod
 	public void after()
 	{
-		d.close();
+		d=Base.closeDriver();
 	}
 }
